@@ -4,7 +4,7 @@ const { send, text } = require('micro')
 const { getPublicControlKey } = require('./model/keys')
 const { ban, isBanned } = require('./service/ban')
 
-async function checkRequest (request, response, endpoints) {
+async function validateRequest (request, response, endpoints) {
   // Endpoint existance
   if (!endpoints[request.method] || !endpoints[request.method][request.pathname]) {
     return send(response, 404, { success: false, error: 'Not found' })
@@ -65,7 +65,7 @@ function getIp (request) {
 }
 
 async function checkAdminRequest (request, response, endpoints) {
-  if (checkRequest(request, response, endpoints)) {
+  if (validateRequest(request, response, endpoints)) {
     if (request.method === 'POST') {
       const ip = getIp(request)
       if (await isBanned(ip)) {
@@ -87,6 +87,6 @@ async function checkAdminRequest (request, response, endpoints) {
 }
 
 module.exports = {
-  checkRequest,
+  checkRequest: validateRequest,
   checkAdminRequest
 }

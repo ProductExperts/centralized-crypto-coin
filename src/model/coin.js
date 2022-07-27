@@ -9,7 +9,7 @@ const COIN_POOL_SIZE = 1000
 const MINUTE = 60
 
 function getCoinValue (coinId) {
-  return COIN_VALUES[parseInt(coinId) % COIN_VALUES.length]
+  return 1; //COIN_VALUES[parseInt(coinId) % COIN_VALUES.length]
 }
 
 const coinPool = (function CoinPool (size) {
@@ -80,10 +80,7 @@ async function isCoinCreationValid (data) {
   }
   const { amount } = data
   // amount is required and should be an integer
-  if (amount === undefined || !Number.isInteger(amount) || amount <= 0 || amount > 500) {
-    return false
-  }
-  return true
+  return !(amount === undefined || !Number.isInteger(amount) || amount <= 0 || amount > 500)
 }
 
 async function isCoinTransferValid (data, expireSeconds) {

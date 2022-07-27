@@ -1,4 +1,4 @@
-const { checkAdminRequest } = require('../checkRequest')
+const { checkAdminRequest } = require('../validateRequest')
 const { coinPool } = require('../model/coin')
 const MAX_CONTENT_LENGTH = 100
 

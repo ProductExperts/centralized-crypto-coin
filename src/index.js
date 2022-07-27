@@ -1,6 +1,7 @@
 const packageInfo = require('../package.json')
-const { checkRequest } = require('./checkRequest')
-
+const { checkRequest } = require('./validateRequest')
+const beautify = require("json-beautify");
+const {send} = require('micro');
 process.env.TZ = 'UTC'
 const MAX_CONTENT_LENGTH = 1000
 
@@ -11,7 +12,11 @@ const endpoints = {
       description: 'List all API endpoints',
       call: () => {
         const { name, version, description, repository, license } = packageInfo
-        return { name, version, description, repository, license, endpoints }
+        return {
+          success: true,
+          result: beautify({ name, version, description, repository, license, endpoints })
+          contentType: "application/html"
+        };
       }
     },
     '/time': {

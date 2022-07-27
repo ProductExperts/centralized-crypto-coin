@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "ecdsa-secp256r1": "^1.2.1",
+    "json-beautify": "^1.1.1",
     "micro": "^9.3.2",
     "redis": "^2.8.0"
   },
